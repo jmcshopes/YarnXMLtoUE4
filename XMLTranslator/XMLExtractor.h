@@ -13,6 +13,6 @@ class FXMLExtractor {
 public:
 
 	std::string ReadBody(tinyxml2::XMLDocument*, std::string);
-	std::string FolderPath = "C:\\Users\\Jack\\Documents\\Yarn\\";
+	std::string FolderPath = "D:\\Projects\\Jack\\YarnXMLtoUE4\\XMLFiles\\";
 
 };
