@@ -9,3 +9,7 @@ XMLTranslator/Debug/*
 *.sln
 *.VC.opendb
 *.VC.db
+
+
+#XML Files for examples
+XMLFiles/* 
