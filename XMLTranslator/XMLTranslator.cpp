@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <iterator>
 #include "tinyxml2.h"
 #include "parser.h"
 #include "XMLExtractor.h"
@@ -28,11 +30,20 @@ int main()
 
 std::string GetPlayerChoice(std::string XMLReturn)
 {
-	
-	//std::string xmlstring("Sentence time boys! [[Go to the next node|NextNode]] [[No thanks|NoThanks]] node node node");
-	
-
-
+	std::vector<playeroptiontype> OptionsVector = ParserInstance.ParseOptions(XMLReturn);
+	std::string NPCDialogue = ParserInstance.DialogueParser(XMLReturn);
+	std::cout << "Oleya: " << NPCDialogue << "\n"; // TODO Extract this
+	TMap<int, std::string> NodeMap;
+	for (playeroptiontype iter : OptionsVector) {
+		std::cout << iter.index + 1 << ". " << iter.option << "\n";
+		NodeMap.insert(std::pair<int, std::string>(iter.index + 1, iter.node));
+	}
+	int PlayerChoice;
+	std::cin >> PlayerChoice;
+	auto NodeSearch = NodeMap.find(PlayerChoice);
+	std::string node = NodeSearch->second;
+	return node;
+	/*
 	std::string NPCDialogue = ParserInstance.DialogueParser(XMLReturn);
 	std::cout << "Oleya: " << NPCDialogue << "\n";
 
@@ -51,11 +62,12 @@ std::string GetPlayerChoice(std::string XMLReturn)
 	std::string Node = PlayerChoicePair.second;
 	std::cout << "\n\n";
 	return Node;
+	*/
 }
 
-std::string OptionCrafter(std::string node) // TODO EXPORT This will be the method for acquiring strings from Yarn
+std::string OptionCrafter(std::string node)
 {
-	std::string NPCName = "Oleya";
+	std::string NPCName = "Oleya"; // TODO abstract this
 	std::string Folderbit = XMLRun.FolderPath;
 	std::string FilePath = Folderbit+NPCName+".xml";
 	//std::cout << FilePath << "\n\n";

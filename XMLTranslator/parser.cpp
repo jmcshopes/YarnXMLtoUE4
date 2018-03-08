@@ -1,6 +1,7 @@
 
 #include "parser.h"
 #include <iostream>       // TODO Remove this when not dependent on std::cout
+#include <vector>
 #include <string>         // std::string
 
 TMap<int, std::pair<std::string, std::string>> Parser::OptionsParser(std::string strhaystack)
@@ -43,4 +44,43 @@ std::string Parser::DialogueParser(std::string strhaystack)
 	std::size_t DialogueEnd = strhaystack.find(strneedlestart,0);
 	std::string DialogueString = strhaystack.substr(0, DialogueEnd);
 	return DialogueString;
+}
+
+std::vector<playeroptiontype> Parser::ParseOptions(std::string strhaystack)
+{
+	std::vector<playeroptiontype> OptionsVector;
+	playeroptiontype WorkingOption;
+
+	std::size_t found = 0;
+	int i = 0;
+
+	while (found != std::string::npos) {
+		found = strhaystack.find(strneedlestart, found + 1);
+		if (found != std::string::npos) {
+			//std::cout << "Entry " << i << " start   '" << strneedlestart << "' at: " << found << '\n';
+			std::size_t start = found;
+			found = strhaystack.find(strneedlediv, found + 1);
+			//std::cout << "Entry " << i << " divider '" << strneedlediv << "' at: " << found << '\n';
+			std::size_t div = found;
+			found = strhaystack.find(strneedleend, found + 1);
+			//std::cout << "Entry " << i << " end     '" << strneedleend << "' at: " << found << '\n';
+			std::size_t end = found;
+			
+			// TODO remove these two lines if not needed
+			//std::string option = strhaystack.substr(start + 2, div - start - 2);
+			//std::string node = strhaystack.substr(div + 1, end - div - 1);
+			
+			//std::cout << "Node " << i << " is       " << node << '\n';
+			WorkingOption.index = i;
+			WorkingOption.option = strhaystack.substr(start + 2, div - start - 2);
+			WorkingOption.node = strhaystack.substr(div + 1, end - div - 1);
+			OptionsVector.push_back(WorkingOption);
+			
+			//std::cout << "Option Segment: '" << option << "'\n";
+		}
+
+		i++;
+	}
+
+	return OptionsVector;
 }

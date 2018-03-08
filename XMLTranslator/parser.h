@@ -2,6 +2,7 @@
 
 #include <string>         // std::string
 #include <map>  
+#include <vector>
 #define TMap std::map
 
 struct playeroptiontype {
@@ -15,7 +16,7 @@ class Parser {
 public:
 	TMap<int, std::pair<std::string,std::string>> OptionsParser(std::string);
 	std::string DialogueParser(std::string);
-	//playeroptiontype OptionStruct();
+	std::vector<playeroptiontype> ParseOptions(std::string);
 
 private:
 	std::string strneedlestart = "[["; // These aren't getting picked up at all
