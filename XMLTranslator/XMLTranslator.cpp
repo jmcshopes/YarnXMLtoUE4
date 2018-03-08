@@ -43,26 +43,6 @@ std::string GetPlayerChoice(std::string XMLReturn)
 	auto NodeSearch = NodeMap.find(PlayerChoice);
 	std::string node = NodeSearch->second;
 	return node;
-	/*
-	std::string NPCDialogue = ParserInstance.DialogueParser(XMLReturn);
-	std::cout << "Oleya: " << NPCDialogue << "\n";
-
-	TMap<int, std::pair<std::string, std::string>> OptionsReturned = ParserInstance.OptionsParser(XMLReturn);
-	TMap<int, std::pair<std::string, std::string>>::iterator it = OptionsReturned.begin();
-	while (it != OptionsReturned.end())
-	{
-		std::pair<std::string, std::string> StringPair = it->second;
-
-		std::cout << it->first + 1 << ". " << StringPair.first << std::endl;
-		it++;
-	}
-	int PlayerChoice;
-	std::cin >> PlayerChoice;
-	std::pair<std::string, std::string> PlayerChoicePair = OptionsReturned[PlayerChoice - 1];
-	std::string Node = PlayerChoicePair.second;
-	std::cout << "\n\n";
-	return Node;
-	*/
 }
 
 std::string OptionCrafter(std::string node)

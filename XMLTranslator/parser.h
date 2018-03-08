@@ -8,6 +8,7 @@
 struct playeroptiontype {
 	int index;
 	std::string option;
+	std::string optioncode;
 	std::string node;
 };
 
@@ -19,8 +20,10 @@ public:
 	std::vector<playeroptiontype> ParseOptions(std::string);
 
 private:
-	std::string strneedlestart = "[["; // These aren't getting picked up at all
+	std::string strneedlestart = "[[";
 	std::string strneedlediv = "|";
 	std::string strneedleend = "]]";
+	std::string codeneedlestart = "{";
+	std::string codeneedleend = "}";
 
 };
